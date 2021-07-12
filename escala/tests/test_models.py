@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 
-from escala.models import Doctor
+from escala.models import Address, Doctor
 
 
 class DoctorModelTests(TestCase):
@@ -18,7 +18,29 @@ class DoctorModelTests(TestCase):
 
     def test__str__return(self):
         """
-        __str__() returns the right string.
+        Overridden __str__() returns the right string.
         """
         doctor = self.doctor1
         self.assertEqual(str(doctor), "Carlos Severo")
+
+
+class AddressModelTests(TestCase):
+
+    def setUp(self):
+        self.addres1 = Address(
+            country="Brasil",
+            state="São Paulo",
+            city="São Paulo",
+            district="ABC",
+            street="São Bento",
+            number="25"
+        )
+
+    def test__str__(self):
+        """
+        Overridden __str__() returns the right string.
+        """
+        address = self.addres1
+        self.assertEqual(
+            str(address),
+            "São Bento, 25, ABC, São Paulo, São Paulo, Brasil")
