@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.deletion import CASCADE
 
 
 class Doctor(models.Model):
@@ -36,7 +35,7 @@ class Address(models.Model):
     district = models.CharField('Bairro', max_length=255)
     street = models.CharField('Rua', max_length=255)
     number = models.CharField('Número', max_length=255)
-    Place = models.OneToOneField(Place, on_delete=models.CASCADE)
+    place = models.OneToOneField(Place, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Endereço"

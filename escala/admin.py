@@ -1,10 +1,6 @@
 from django.contrib import admin
 
-from .models import (
-    Address, 
-    Doctor,
-    Place
-    )
+from .models import Address, Doctor, Place
 
 
 class DoctorAdmin(admin.ModelAdmin):
@@ -28,6 +24,7 @@ class PlaceAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
 
 admin.site.register(Doctor, DoctorAdmin)
 admin.site.register(Place, PlaceAdmin)
