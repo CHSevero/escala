@@ -1,7 +1,8 @@
 from datetime import date
+
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django.utils import timezone
-from django.core.exceptions import ValidationError
 
 from escala.models import Address, DayOf, Doctor, Place, Schedule
 
@@ -88,7 +89,7 @@ class DayOfModelTests(TestCase):
             lastname="Silva",
             admission_date=date.fromisoformat('2019-12-04'),
             active=True)
-        place = Place.objects.create(name="Hospital", active=True)  
+        place = Place.objects.create(name="Hospital", active=True)
         return doctor, place
 
     def test_convert_weekday(self):
@@ -103,7 +104,6 @@ class DayOfModelTests(TestCase):
     def test__str__(self):
         self.assertEqual(str(self.day_of1), 'Domingo')
 
-
     def test_clean_with_schedule(self):
         """
         clean() should return ValidationError
@@ -116,8 +116,9 @@ class DayOfModelTests(TestCase):
         )
         day_of = DayOf(day=3, doctor=doctor)
         with self.assertRaisesMessage(
-            expected_exception=ValidationError, 
-            expected_message= "O médico está escalado para trabalhar nesse dia da semana!"):
+            expected_exception=ValidationError,
+            expected_message="O médico está escalado para trabalhar nesse dia da semana!"
+        ):
             day_of.clean()
 
     def test_clean_without_schedule(self):
@@ -149,13 +150,13 @@ class ScheduleModelsTests(TestCase):
         self.assertEqual(str(schedule), f"Carlos Severo, Hospital, {timezone.now().date()}")
 
     def test_convert_weekday(self):
-        schedule1 = Schedule(date=date.fromisoformat('2021-07-11'),place=self.place1, doctor=self.doctor1)
-        schedule2 = Schedule(date=date.fromisoformat('2021-07-12'),place=self.place1, doctor=self.doctor1)
-        schedule3 = Schedule(date=date.fromisoformat('2021-07-13'),place=self.place1, doctor=self.doctor1)
-        schedule4 = Schedule(date=date.fromisoformat('2021-07-14'),place=self.place1, doctor=self.doctor1)
-        schedule5 = Schedule(date=date.fromisoformat('2021-07-15'),place=self.place1, doctor=self.doctor1)
-        schedule6 = Schedule(date=date.fromisoformat('2021-07-16'),place=self.place1, doctor=self.doctor1)
-        schedule7 = Schedule(date=date.fromisoformat('2021-07-17'),place=self.place1, doctor=self.doctor1)
+        schedule1 = Schedule(date=date.fromisoformat('2021-07-11'), place=self.place1, doctor=self.doctor1)
+        schedule2 = Schedule(date=date.fromisoformat('2021-07-12'), place=self.place1, doctor=self.doctor1)
+        schedule3 = Schedule(date=date.fromisoformat('2021-07-13'), place=self.place1, doctor=self.doctor1)
+        schedule4 = Schedule(date=date.fromisoformat('2021-07-14'), place=self.place1, doctor=self.doctor1)
+        schedule5 = Schedule(date=date.fromisoformat('2021-07-15'), place=self.place1, doctor=self.doctor1)
+        schedule6 = Schedule(date=date.fromisoformat('2021-07-16'), place=self.place1, doctor=self.doctor1)
+        schedule7 = Schedule(date=date.fromisoformat('2021-07-17'), place=self.place1, doctor=self.doctor1)
 
         self.assertEqual(schedule1.convert_weekday(), 1)
         self.assertEqual(schedule2.convert_weekday(), 2)
@@ -176,8 +177,9 @@ class ScheduleModelsTests(TestCase):
             doctor=self.doctor1)
 
         with self.assertRaisesMessage(
-            expected_exception=ValidationError, 
-            expected_message="O médico tem folga nessa data. Por favor escolha outra data."):
+            expected_exception=ValidationError,
+            expected_message="O médico tem folga nessa data. Por favor escolha outra data."
+        ):
             scheduele.clean()
 
     def test_clean_without_day_of(self):
@@ -189,4 +191,50 @@ class ScheduleModelsTests(TestCase):
             place=self.place1,
             doctor=self.doctor1)
 
-        self.assertIsNone(scheduele.clean())        
+        self.assertIsNone(scheduele.clean())
+
+    def test_clean_with_no_active_doctor(self):
+        """
+        clean() should return ValidationError
+        """
+        doctor = Doctor.objects.create(
+            firstname="Não",
+            lastname="Ativo",
+            admission_date=timezone.now(),
+            active=False)
+
+        place = Place.objects.create(name="Hospital", active=True)
+
+        scheduele = Schedule(
+            date=date.fromisoformat('2021-07-17'),
+            place=place,
+            doctor=doctor)
+        
+        with self.assertRaisesMessage(
+            expected_exception=ValidationError,
+            expected_message="Este médico não está ativo."
+        ):
+            scheduele.clean()
+
+    def test_clean_with_no_active_place(self):
+        """
+        clean() should return ValidationError
+        """
+        doctor = Doctor.objects.create(
+            firstname="Ativo",
+            lastname="Ativo",
+            admission_date=timezone.now(),
+            active=True)
+
+        place = Place.objects.create(name="Não ativo Hospital", active=False)
+
+        scheduele = Schedule(
+            date=date.fromisoformat('2021-07-17'),
+            place=place,
+            doctor=doctor)
+        
+        with self.assertRaisesMessage(
+            expected_exception=ValidationError,
+            expected_message="Este posto de trabalho não está ativo."
+        ):
+            scheduele.clean()

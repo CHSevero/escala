@@ -20,7 +20,7 @@ class AddressInline(admin.StackedInline):
 
 class PlaceAdmin(admin.ModelAdmin):
     inlines = [AddressInline]
-    list_display = ('name',)
+    list_display = ('name', 'active')
 
     def has_delete_permission(self, request, obj=None):
         return False
@@ -29,8 +29,10 @@ class PlaceAdmin(admin.ModelAdmin):
 class DayOfAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'doctor')
 
+
 class ScheduleAdmin(admin.ModelAdmin):
-    list_display = ('date', 'doctor', 'place')
+    list_display = ('date', 'doctor', 'place',)
+
 
 admin.site.register(Doctor, DoctorAdmin)
 admin.site.register(Place, PlaceAdmin)

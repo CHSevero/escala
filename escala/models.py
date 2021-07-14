@@ -1,5 +1,5 @@
-from django.db import models
 from django.core.exceptions import ValidationError
+from django.db import models
 
 
 class Doctor(models.Model):
@@ -118,16 +118,26 @@ class Schedule(models.Model):
         return f"{self.doctor}, {self.place}, {self.date}"
 
     def convert_weekday(self):
-        if self.date.weekday() == 0: return 2
-        if self.date.weekday() == 1: return 3
-        if self.date.weekday() == 2: return 4
-        if self.date.weekday() == 3: return 5
-        if self.date.weekday() == 4: return 6
-        if self.date.weekday() == 5: return 7
-        if self.date.weekday() == 6: return 1
+        if self.date.weekday() == 0:
+            return 2
+        if self.date.weekday() == 1:
+            return 3
+        if self.date.weekday() == 2:
+            return 4
+        if self.date.weekday() == 3:
+            return 5
+        if self.date.weekday() == 4:
+            return 6
+        if self.date.weekday() == 5:
+            return 7
+        if self.date.weekday() == 6:
+            return 1
 
     def clean(self):
         if DayOf.objects.filter(doctor=self.doctor, day=self.convert_weekday()).exists():
             raise ValidationError("O médico tem folga nessa data. Por favor escolha outra data.")
-
+        if not self.doctor.active:
+            raise ValidationError("Este médico não está ativo.")
+        if not self.place.active:
+            raise ValidationError("Este posto de trabalho não está ativo.")
         return super().clean()
