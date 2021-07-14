@@ -209,7 +209,7 @@ class ScheduleModelsTests(TestCase):
             date=date.fromisoformat('2021-07-17'),
             place=place,
             doctor=doctor)
-        
+
         with self.assertRaisesMessage(
             expected_exception=ValidationError,
             expected_message="Este médico não está ativo."
@@ -232,7 +232,7 @@ class ScheduleModelsTests(TestCase):
             date=date.fromisoformat('2021-07-17'),
             place=place,
             doctor=doctor)
-        
+
         with self.assertRaisesMessage(
             expected_exception=ValidationError,
             expected_message="Este posto de trabalho não está ativo."
