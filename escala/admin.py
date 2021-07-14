@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Address, DayOf, Doctor, Place
+from .models import Address, DayOf, Doctor, Place, Schedule
 
 
 class DoctorAdmin(admin.ModelAdmin):
@@ -29,7 +29,10 @@ class PlaceAdmin(admin.ModelAdmin):
 class DayOfAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'doctor')
 
+class ScheduleAdmin(admin.ModelAdmin):
+    list_display = ('date', 'doctor', 'place')
 
 admin.site.register(Doctor, DoctorAdmin)
 admin.site.register(Place, PlaceAdmin)
 admin.site.register(DayOf, DayOfAdmin)
+admin.site.register(Schedule, ScheduleAdmin)
