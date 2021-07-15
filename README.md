@@ -7,18 +7,16 @@ A formação do grupo permitiu que eles definissem uma escala de atendimento e c
 
 Todo o problema e descrição do trabalho está no arquivo DesafioDjango.pdf
 
-# Solução
-
 ## Tecnologias
 * Python 3.9.6
     Linguagem de programação utiliza
 * Django 3.2.5
-    Framework para desenvolvimento we
+    Framework para desenvolvimento web
 * Coverage 5.5
-    Biblioteca para auxiliar na creação nos testes automatizado.
+    Biblioteca para auxiliar na criação nos testes automatizado.
 * flake8 3.9.2
     Biblioteca para auxiliar na adequação ao pep8.
 * isort 5.9.2
     Biblioteca para automaticamento organizar os imports segundo o pep8.
 * sqlite3
-    Banco de dados relacinal leve e facíl utilização.
+    Banco de dados relacinal leve e de facíl utilização.
