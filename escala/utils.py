@@ -5,12 +5,12 @@ from escala import models
 from .models import Doctor, Place, Schedule
 
 
-def generate_spreadsheet():
+def generate_spreadsheet(date_to_generate):
     places = Place.objects.filter(active=True).order_by('name')
     place_list = list()
     for place in places:
         place_list.append(str(place))
-    week = generate_week(date.today())
+    week = generate_week(date_to_generate)
     week_schedule_list = list()
     for day in week:
         day_schedule = list()
