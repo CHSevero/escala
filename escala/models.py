@@ -113,6 +113,7 @@ class Schedule(models.Model):
         verbose_name = "Escala"
         verbose_name_plural = "Escalas"
         unique_together = ['date', 'doctor']
+        unique_together = ['date', 'place']
 
     def __str__(self):
         return f"{self.doctor}, {self.place}, {self.date}"
