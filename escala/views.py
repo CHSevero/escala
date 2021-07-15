@@ -1,13 +1,8 @@
 from datetime import date
-import datetime
-
-
-from datetime import date
 
 from django.shortcuts import render
 
 from . import utils
-from .models import Place, Schedule
 
 
 def escala(request):
@@ -16,5 +11,4 @@ def escala(request):
         'place_list': place_list,
         'week_schedule': week_schedule
     }
-    return render(request,'escala/escala.html', context)
-
+    return render(request, 'escala/escala.html', context)

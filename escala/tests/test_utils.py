@@ -1,10 +1,10 @@
 from datetime import date
-from django.http import response
 
 from django.test import TestCase
 
-from escala.utils import generate_monday, generate_week, generate_spreadsheet
-from escala.models import Place, Schedule, Doctor
+from escala.models import Doctor, Place, Schedule
+from escala.utils import generate_monday, generate_spreadsheet, generate_week
+
 
 class utilsTests(TestCase):
 
@@ -52,10 +52,10 @@ class utilsTests(TestCase):
         ]
 
         self.assertEqual(response_week, week)
-    
+
     def test_generate_spreadsheet(self):
         date1 = date.fromisoformat('2021-07-15')
-        doctor1 = Doctor.objects.create(firstname='Antônio', lastname='antonio', active=True , admission_date=date1)
+        doctor1 = Doctor.objects.create(firstname='Antônio', lastname='antonio', active=True, admission_date=date1)
         place1 = Place.objects.create(name='Posto de trabalho 1', active=True)
         Schedule.objects.create(doctor=doctor1, place=place1, date=date1)
 
