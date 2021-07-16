@@ -20,6 +20,21 @@ Todo o problema e descrição do trabalho está no arquivo DesafioDjango.pdf
     Biblioteca para automaticamento organizar os imports segundo o pep8.
 * sqlite3
     Banco de dados relacinal leve e de facíl utilização.
-
+# Criação do ambiente de desenvolvimento
+* python3.9 -m venv venv .
+## Ativando o ambiente de desenvolvimento
+* source venv/bin/activate para linux
 ## Instalação do dos requerimentos
+* Vá para raiz do projeto
 * pip install -r requirements.txt
+# Criando os modelos 
+* python manage.py makemigrations
+* python manage.py migrate
+# Criando super user
+* python manage.py createsuperuser
+# Execução
+* python manage.py runserver
+# Estrutura do Projeto
+* http://127.0.0.1:8000/ fica a escala dos médicos
+* http://127.0.0.1:8000/admin/ fica administração da aplicação
+* essas urls são válidas no localhost
