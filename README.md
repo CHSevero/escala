@@ -20,3 +20,6 @@ Todo o problema e descrição do trabalho está no arquivo DesafioDjango.pdf
     Biblioteca para automaticamento organizar os imports segundo o pep8.
 * sqlite3
     Banco de dados relacinal leve e de facíl utilização.
+
+## Instalação do dos requerimentos
+* pip install -r requirements.txt
