@@ -1,0 +1,6 @@
+/venv
+**/htmlcov
+.coverage
+db.sqlite3
+/escala/migrations/__pycache__
+/escala/migrations/0001_initial.py
