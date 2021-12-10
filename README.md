@@ -1,40 +1,38 @@
-# Problema
-Um grupo de médicos criou uma empresa para atender, em conjunto, um grupo de postos de
-trabalho. Anteriormente, cada um deles atendia individualmente os seus próprios postos de
-trabalho, mas tinham dificuldades de tirar dias de folga pois sempre precisavam procurar
-alguém para cobrir o dia de ausência.
-A formação do grupo permitiu que eles definissem uma escala de atendimento e cada um deles pode, agora, folgar um dia da semana.
+# The Problem
+A group of doctors created a company to serve, together, a group of workstations. Previously, each of them individually attended to their own jobs, but they had difficulties taking days off as they always needed to look for
+someone to cover the day of absence.
+The formation of the group allowed them to define a schedule of care and each one of them can now take a day off a week.
 
-Todo o problema e descrição do trabalho está no arquivo DesafioDjango.pdf
+All problem and job description (in Portuguese) is in the file DesafioDjango.pdf
 
-## Tecnologias
+## Technologies
 * Python 3.9.6
-    Linguagem de programação utiliza
+    Programming language used
 * Django 3.2.5
-    Framework para desenvolvimento web
+    Web development framework
 * Coverage 5.5
-    Biblioteca para auxiliar na criação nos testes automatizado.
+    Library to help create automated tests.
 * flake8 3.9.2
-    Biblioteca para auxiliar na adequação ao pep8.
+    Library to assist in adapting to pep8.
 * isort 5.9.2
-    Biblioteca para automaticamento organizar os imports segundo o pep8.
+   Library to automatically organize imports according to pep8.
 * sqlite3
-    Banco de dados relacinal leve e de facíl utilização.
-# Criação do ambiente de desenvolvimento
+    Lightweight and user-friendly relational database.
+# Development environment creation
 * python3.9 -m venv venv .
-## Ativando o ambiente de desenvolvimento
-* source venv/bin/activate para linux
-## Instalação do dos requerimentos
-* Vá para raiz do projeto
+## Activating the development environment
+* source venv/bin/activate for linux
+## Requirements installation
+* Go to project root
 * pip install -r requirements.txt
-# Criando os modelos 
+# creating the models
 * python manage.py makemigrations
 * python manage.py migrate
-# Criando super user
+# creating super user
 * python manage.py createsuperuser
-# Execução
+# run
 * python manage.py runserver
-# Estrutura do Projeto
-* http://127.0.0.1:8000/ fica a escala dos médicos
-* http://127.0.0.1:8000/admin/ fica administração da aplicação
-* essas urls são válidas no localhost
+# Project's urls
+* http://127.0.0.1:8000/ doctor's scale
+* http://127.0.0.1:8000/admin/ application administration
+* these urls are valid on localhost
